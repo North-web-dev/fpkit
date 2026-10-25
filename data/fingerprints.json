@@ -1,0 +1,456 @@
+{
+  "schema_version": "1",
+  "generated": "2026-10-25",
+  "note": "Merged TLS/HTTP fingerprint dataset. Every entry is measured, not guessed; see per-entry provenance. Browsers/engines read as browsers; clients are known automation tools/libraries.",
+  "sources": [
+    {
+      "name": "North-web-dev/fingerprint-db",
+      "url": "https://github.com/North-web-dev/fingerprint-db",
+      "role": "curated browser fingerprints (uTLS *_Auto via tls.peet.ws) + live Playwright engine fingerprints"
+    },
+    {
+      "name": "work-threatfeed/measure",
+      "url": "",
+      "role": "measured non-browser client fingerprints (curl, wget, Go, Java, Node, Python) via fp.shshbshsnang.shop"
+    }
+  ],
+  "entries": [
+    {
+      "name": "chrome",
+      "kind": "browser",
+      "category": "browser",
+      "verdict": "browser",
+      "label": "Google Chrome 131 (Windows)",
+      "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36",
+      "utls_client_hello_id": "HelloChrome_Auto",
+      "tls": {
+        "ja3": "771,4865-4866-4867-49195-49199-49196-49200-52393-52392-49171-49172-156-157-47-53,27-18-51-5-45-35-0-10-16-23-13-65281-17613-11-43-65037,4588-29-23-24,0",
+        "ja3_hash": "0b8a3d13236c51b15ed53ac3edab8839",
+        "ja4": "t13d1516h2_8daaf6152771_d8a2da3f94cd"
+      },
+      "http2": {
+        "akamai_fingerprint": "1:65536;2:0;4:6291456;6:262144|15663105|0|m,a,s,p",
+        "akamai_hash": "52d84b11737d980aef856699f885ca86"
+      },
+      "provenance": {
+        "source": "tls.peet.ws",
+        "method": "uTLS HelloChrome_Auto template",
+        "measured": "2026-07-03"
+      }
+    },
+    {
+      "name": "edge",
+      "kind": "browser",
+      "category": "browser",
+      "verdict": "browser",
+      "label": "Microsoft Edge 131 (Windows)",
+      "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36 Edg/131.0.0.0",
+      "utls_client_hello_id": "HelloEdge_Auto",
+      "tls": {
+        "ja3": "771,4865-4866-4867-49195-49199-49196-49200-52393-52392-49171-49172-156-157-47-53,0-23-65281-10-11-35-16-5-13-18-51-45-43-27-21,29-23-24,0",
+        "ja3_hash": "b32309a26951912be7dba376398abc3b",
+        "ja4": "t13d1515h2_8daaf6152771_bc9a4605e104"
+      },
+      "http2": {
+        "akamai_fingerprint": "1:65536;2:0;4:6291456;6:262144|15663105|0|m,a,s,p",
+        "akamai_hash": "52d84b11737d980aef856699f885ca86"
+      },
+      "provenance": {
+        "source": "tls.peet.ws",
+        "method": "uTLS HelloEdge_Auto template",
+        "measured": "2026-07-03"
+      }
+    },
+    {
+      "name": "firefox",
+      "kind": "browser",
+      "category": "browser",
+      "verdict": "browser",
+      "label": "Mozilla Firefox 133 (Windows)",
+      "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:133.0) Gecko/20100101 Firefox/133.0",
+      "utls_client_hello_id": "HelloFirefox_Auto",
+      "tls": {
+        "ja3": "771,4865-4867-4866-49195-49199-52393-52392-49196-49200-49162-49161-49171-49172-156-157-47-53,0-23-65281-10-11-35-16-5-34-51-43-13-45-28-65037,29-23-24-25-256-257,0",
+        "ja3_hash": "b5001237acdf006056b409cc433726b0",
+        "ja4": "t13d1715h2_5b57614c22b0_5c2c66f702b0"
+      },
+      "http2": {
+        "akamai_fingerprint": "1:65536;4:131072;5:16384|12517377|0|m,p,a,s",
+        "akamai_hash": "1366b660f01a0a73d5578fc3c06dc011"
+      },
+      "provenance": {
+        "source": "tls.peet.ws",
+        "method": "uTLS HelloFirefox_Auto template",
+        "measured": "2026-07-03"
+      }
+    },
+    {
+      "name": "ios",
+      "kind": "browser",
+      "category": "browser",
+      "verdict": "browser",
+      "label": "Safari 17.4 (iOS / iPhone)",
+      "user_agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 17_4 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.4 Mobile/15E148 Safari/604.1",
+      "utls_client_hello_id": "HelloIOS_Auto",
+      "tls": {
+        "ja3": "771,4865-4866-4867-49196-49195-52393-49200-49199-52392-49188-49187-49162-49161-49192-49191-49172-49171-157-156-61-60-53-47-49160-49170-10,0-23-65281-10-11-16-5-13-18-51-45-43-21,29-23-24-25,0",
+        "ja3_hash": "656b9a2f4de6ed4909e157482860ab3d",
+        "ja4": "t13d2613h2_2802a3db6c62_38ba08824cc9"
+      },
+      "http2": {
+        "akamai_fingerprint": "3:100;4:2097152|10420225|0|m,s,p,a",
+        "akamai_hash": "1c3c4a69d698caccf99ff56ab8ddade6"
+      },
+      "provenance": {
+        "source": "tls.peet.ws",
+        "method": "uTLS HelloIOS_Auto template",
+        "measured": "2026-07-03"
+      }
+    },
+    {
+      "name": "safari",
+      "kind": "browser",
+      "category": "browser",
+      "verdict": "browser",
+      "label": "Apple Safari 17.4 (macOS)",
+      "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.4 Safari/605.1.15",
+      "utls_client_hello_id": "HelloSafari_Auto",
+      "tls": {
+        "ja3": "771,4865-4866-4867-49196-49195-52393-49200-49199-52392-49162-49161-49172-49171-157-156-53-47-49160-49170-10,0-23-65281-10-11-16-5-13-18-51-45-43-27-21,29-23-24-25,0",
+        "ja3_hash": "773906b0efdefa24a7f2b8eb6985bf37",
+        "ja4": "t13d2014h2_a09f3c656075_874d27d7ca63"
+      },
+      "http2": {
+        "akamai_fingerprint": "3:100;4:4194304|10420225|0|m,s,p,a",
+        "akamai_hash": "51bd911b8be80498e6b0004a7f40691f"
+      },
+      "provenance": {
+        "source": "tls.peet.ws",
+        "method": "uTLS HelloSafari_Auto template",
+        "measured": "2026-07-03"
+      }
+    },
+    {
+      "name": "chromium",
+      "kind": "engine",
+      "category": "browser-engine",
+      "verdict": "browser-engine",
+      "label": "Chromium 156.0.8078.4 (Playwright build)",
+      "user_agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.8078.4 Safari/537.36",
+      "tls": {
+        "ja3": "771,4865-4866-4867-49195-49199-49196-49200-52393-52392-49171-49172-156-157-47-53,11-18-45-43-10-5-27-17613-0-65037-16-65281-35-23-13-51,4588-29-23-24,0",
+        "ja3_hash": "6889acb14492b6b32e49003700c28815",
+        "ja4": "t13d1516h2_8daaf6152771_806a8c22fdea"
+      },
+      "http2": {
+        "akamai_fingerprint": "1:65536;2:0;4:6291456;6:262144|15663105|0|m,a,s,p",
+        "akamai_hash": "52d84b11737d980aef856699f885ca86"
+      },
+      "ja4h": "ge20nn120000_1d5643f8516d_000000000000_000000000000",
+      "provenance": {
+        "source": "fp.shshbshsnang.shop",
+        "method": "playwright chromium 156.0.8078.4",
+        "measured": "2026-10-25"
+      }
+    },
+    {
+      "name": "firefox-engine",
+      "kind": "engine",
+      "category": "browser-engine",
+      "verdict": "browser-engine",
+      "label": "Firefox 157.0 (Playwright build)",
+      "user_agent": "Mozilla/5.0 (X11; Linux x86_64; rv:157.0) Gecko/20100101 Firefox/157.0",
+      "tls": {
+        "ja3": "771,4865-4867-4866-49195-49199-52393-52392-49196-49200-49171-49172-156-157-47-53,0-23-65281-10-11-35-16-5-34-18-51-43-13-45-28-27-65037,4588-29-23-24-25,0",
+        "ja3_hash": "9d42e90b0225e779f03141ddcd699df2",
+        "ja4": "t13d1517h2_8daaf6152771_3cbfd9057e0d"
+      },
+      "http2": {
+        "akamai_fingerprint": "1:65536;2:0;4:131072;5:16384|12517377|0|m,p,a,s",
+        "akamai_hash": "6ea73faa8fc5aac76bded7bd238f6433"
+      },
+      "ja4h": "ge20nn11enus_3901d4197baf_000000000000_000000000000",
+      "provenance": {
+        "source": "fp.shshbshsnang.shop",
+        "method": "playwright firefox 157.0",
+        "measured": "2026-10-25"
+      }
+    },
+    {
+      "name": "webkit",
+      "kind": "engine",
+      "category": "browser-engine",
+      "verdict": "browser-engine",
+      "label": "WebKit 27.2 (Playwright build)",
+      "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/27.2 Safari/605.1.15",
+      "tls": {
+        "ja3": "771,4866-4867-4865-4868-49196-52393-49325-49162-49195-49324-49161-49200-52392-49172-49199-49171-157-49309-53-156-49308-47-159-52394-49311-57-158-49310-51,45-28-5-65281-35-16-11-51-43-13-10-0-21,23-24-25-29-30-256-257-258-259-260,0",
+        "ja3_hash": "a5e01ef6d6fa276ee2bb113393d73827",
+        "ja4": "t13d2913h2_723694b0fccc_de8bb8096728"
+      },
+      "http2": {
+        "akamai_fingerprint": "4:6291456;1:65536;2:0|15663105|0|m,s,a,p",
+        "akamai_hash": "d718679a0777ff3d3f1e14c356423f0b"
+      },
+      "ja4h": "ge20nn07enus_98b3c1b58505_000000000000_000000000000",
+      "provenance": {
+        "source": "fp.shshbshsnang.shop",
+        "method": "playwright webkit 27.2",
+        "measured": "2026-10-25"
+      }
+    },
+    {
+      "name": "curl-http2-8.18",
+      "kind": "client",
+      "category": "tool",
+      "verdict": "non-browser",
+      "label": "curl 8.18.0",
+      "user_agent": "curl/8.18.0",
+      "tls": {
+        "ja3": "771,4866-4867-4865-49196-49200-159-52393-52392-52394-49195-49199-158-49188-49192-107-49187-49191-103-49162-49172-57-49161-49171-51-157-156-61-60-53-47,65281-0-11-10-16-22-23-49-13-43-45-51-27,4588-29-23-30-24-25-256-257,0-1-2",
+        "ja3_hash": "32e4b8812cda0c0d50783b438492a769",
+        "ja4": "t13d3013h2_1d37bd780c83_8537cf56674e"
+      },
+      "http2": {
+        "akamai_fingerprint": "3:100;4:65536;2:0|1048510465|0|m,s,a,p",
+        "akamai_hash": "55cb2bd667724e6d46cc3c8dd15d50de"
+      },
+      "ja4h": "ge20nn020000_5594a17e7e7e_000000000000_000000000000",
+      "provenance": {
+        "source": "fp.shshbshsnang.shop",
+        "method": "curl --http2 8.18.0",
+        "measured": "2026-10-25"
+      }
+    },
+    {
+      "name": "curl-http1",
+      "kind": "client",
+      "category": "tool",
+      "verdict": "non-browser",
+      "label": "curl (HTTP/1.1) 7.81.0",
+      "user_agent": "",
+      "tls": {
+        "ja3": "",
+        "ja3_hash": "",
+        "ja4": "t13d3113h1_e8f1e7e78f70_ce5650b735ce"
+      },
+      "http2": {
+        "akamai_fingerprint": "",
+        "akamai_hash": ""
+      },
+      "ja4h": "ge11nn030000_fe444ad14866_000000000000_000000000000",
+      "provenance": {
+        "source": "https://fp.shshbshsnang.shop/api/all",
+        "method": "measured curl",
+        "measured": "2026-10-25"
+      }
+    },
+    {
+      "name": "curl-http2",
+      "kind": "client",
+      "category": "tool",
+      "verdict": "non-browser",
+      "label": "curl (HTTP/2 ALPN) 7.81.0",
+      "user_agent": "",
+      "tls": {
+        "ja3": "",
+        "ja3_hash": "",
+        "ja4": "t13d3113h2_e8f1e7e78f70_ce5650b735ce"
+      },
+      "http2": {
+        "akamai_fingerprint": "3:100;4:33554432;2:0|33488897|0|m,p,s,a",
+        "akamai_hash": ""
+      },
+      "ja4h": "ge20nn020000_5594a17e7e7e_000000000000_000000000000",
+      "provenance": {
+        "source": "https://fp.shshbshsnang.shop/api/all",
+        "method": "measured curl",
+        "measured": "2026-10-25"
+      }
+    },
+    {
+      "name": "wget",
+      "kind": "client",
+      "category": "tool",
+      "verdict": "non-browser",
+      "label": "GNU Wget 1.21.2",
+      "user_agent": "",
+      "tls": {
+        "ja3": "",
+        "ja3_hash": "",
+        "ja4": "t13d751100_479067518aa3_fb8d5ffd48c1"
+      },
+      "http2": {
+        "akamai_fingerprint": "",
+        "akamai_hash": ""
+      },
+      "ja4h": "ge11nn050000_3658ef221638_000000000000_000000000000",
+      "provenance": {
+        "source": "https://fp.shshbshsnang.shop/api/all",
+        "method": "measured wget",
+        "measured": "2026-10-25"
+      }
+    },
+    {
+      "name": "go-net-http",
+      "kind": "client",
+      "category": "library",
+      "verdict": "non-browser",
+      "label": "Go net/http go1.18.1",
+      "user_agent": "",
+      "tls": {
+        "ja3": "",
+        "ja3_hash": "",
+        "ja4": "t13d1910h2_9dc949149365_97f8aa674fd9"
+      },
+      "http2": {
+        "akamai_fingerprint": "2:0;4:4194304;6:10485760|1073741824|0|a,m,p,s",
+        "akamai_hash": ""
+      },
+      "ja4h": "ge20nn020000_b89ce445e0b3_000000000000_000000000000",
+      "provenance": {
+        "source": "https://fp.shshbshsnang.shop/api/all",
+        "method": "measured go-net-http",
+        "measured": "2026-10-25"
+      }
+    },
+    {
+      "name": "java-httpclient",
+      "kind": "client",
+      "category": "library",
+      "verdict": "non-browser",
+      "label": "Java HttpClient 21.0.12.1",
+      "user_agent": "",
+      "tls": {
+        "ja3": "",
+        "ja3_hash": "",
+        "ja4": "t13d3113h2_1d947a95fc68_7e1102d2036b"
+      },
+      "http2": {
+        "akamai_fingerprint": "1:16384;2:0;3:0;4:16777216;5:16384;6:393216|33488897|0|a,m,p,s",
+        "akamai_hash": ""
+      },
+      "ja4h": "ge20nn010000_a510e5066512_000000000000_000000000000",
+      "provenance": {
+        "source": "https://fp.shshbshsnang.shop/api/all",
+        "method": "measured java-httpclient",
+        "measured": "2026-10-25"
+      }
+    },
+    {
+      "name": "node-undici",
+      "kind": "client",
+      "category": "library",
+      "verdict": "non-browser",
+      "label": "Node fetch (undici) 8.9.0",
+      "user_agent": "",
+      "tls": {
+        "ja3": "",
+        "ja3_hash": "",
+        "ja4": "t13d5212h1_b262b3658495_8e6e362c5eac"
+      },
+      "http2": {
+        "akamai_fingerprint": "2:0;4:262144|458753|0|a,m,p,s",
+        "akamai_hash": ""
+      },
+      "ja4h": "ge20nn05*000_ba03334ad3ea_000000000000_000000000000",
+      "provenance": {
+        "source": "https://fp.shshbshsnang.shop/api/all",
+        "method": "measured node-undici",
+        "measured": "2026-10-25"
+      }
+    },
+    {
+      "name": "python-urllib",
+      "kind": "client",
+      "category": "library",
+      "verdict": "non-browser",
+      "label": "python urllib 3.10.12",
+      "user_agent": "",
+      "tls": {
+        "ja3": "",
+        "ja3_hash": "",
+        "ja4": "t13d1813h1_85036bcba153_d339722ba4af"
+      },
+      "http2": {
+        "akamai_fingerprint": "",
+        "akamai_hash": ""
+      },
+      "ja4h": "ge11nn040000_5b1e8b5f4d2d_000000000000_000000000000",
+      "provenance": {
+        "source": "https://fp.shshbshsnang.shop/api/all",
+        "method": "measured python-urllib",
+        "measured": "2026-10-25"
+      }
+    },
+    {
+      "name": "python-aiohttp",
+      "kind": "client",
+      "category": "library",
+      "verdict": "non-browser",
+      "label": "python-aiohttp 3.13.5",
+      "user_agent": "",
+      "tls": {
+        "ja3": "",
+        "ja3_hash": "",
+        "ja4": "t13d1812h1_85036bcba153_d41ae481755e"
+      },
+      "http2": {
+        "akamai_fingerprint": "",
+        "akamai_hash": ""
+      },
+      "ja4h": "ge11nn040000_66d37a417839_000000000000_000000000000",
+      "provenance": {
+        "source": "https://fp.shshbshsnang.shop/api/all",
+        "method": "measured python-aiohttp",
+        "measured": "2026-10-25"
+      }
+    },
+    {
+      "name": "python-httpx",
+      "kind": "client",
+      "category": "library",
+      "verdict": "non-browser",
+      "label": "python-httpx 0.28.1",
+      "user_agent": "",
+      "tls": {
+        "ja3": "",
+        "ja3_hash": "",
+        "ja4": "t13d1812h1_85036bcba153_d41ae481755e"
+      },
+      "http2": {
+        "akamai_fingerprint": "1:4096;2:0;4:65535;5:16384;3:100;6:65536|16777216|0|m,a,s,p",
+        "akamai_hash": ""
+      },
+      "ja4h": "ge20nn030000_6dac75bd47eb_000000000000_000000000000",
+      "provenance": {
+        "source": "https://fp.shshbshsnang.shop/api/all",
+        "method": "measured python-httpx",
+        "measured": "2026-10-25"
+      }
+    },
+    {
+      "name": "python-requests",
+      "kind": "client",
+      "category": "library",
+      "verdict": "non-browser",
+      "label": "python-requests 2.34.2",
+      "user_agent": "",
+      "tls": {
+        "ja3": "",
+        "ja3_hash": "",
+        "ja4": "t13d1812h1_85036bcba153_b26ce05bbdd6"
+      },
+      "http2": {
+        "akamai_fingerprint": "",
+        "akamai_hash": ""
+      },
+      "ja4h": "ge11nn050000_b223a0ebb0b5_000000000000_000000000000",
+      "provenance": {
+        "source": "https://fp.shshbshsnang.shop/api/all",
+        "method": "measured python-requests",
+        "measured": "2026-10-25"
+      }
+    }
+  ]
+}

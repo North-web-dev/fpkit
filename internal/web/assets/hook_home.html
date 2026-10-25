@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>fp hook</title>
+<link rel="stylesheet" href="/_fp/app.css">
+</head>
+<body>
+<div class="wrap">
+  <header class="site">
+    <span class="logo">fp<b>·</b>hook</span>
+    <span class="tag">capture and inspect any HTTP request — with the caller's JA4</span>
+  </header>
+
+  <h1>Request bins</h1>
+  <p class="sub">Create a bin, then point any client at its capture URL. Every request is captured
+     (method, URL, headers, body) with the caller's JA4 fingerprint when it arrives over TLS.</p>
+
+  <button class="btn" id="create">Create a bin</button>
+
+  <div id="out" style="margin-top:22px; display:none;">
+    <label>Capture URL — send requests here</label>
+    <div class="pill-url" id="capUrl"></div>
+    <div style="margin-top:14px;"><a class="btn ghost" id="view">Open live inspector →</a></div>
+  </div>
+
+  <div class="foot">
+    Bins and captured requests live in memory with a TTL and a global cap; they are not persisted.
+    Captured content is attacker-controlled and is always escaped in the inspector UI.
+  </div>
+</div>
+
+<script>
+document.getElementById('create').addEventListener('click', async () => {
+  const d = await (await fetch('/api/bins', {method: 'POST'})).json();
+  const base = location.origin;
+  document.getElementById('out').style.display = 'block';
+  document.getElementById('capUrl').textContent = base + '/b/' + d.id + '/anything';
+  document.getElementById('view').href = '/i/' + d.id;
+});
+</script>
+</body>
+</html>

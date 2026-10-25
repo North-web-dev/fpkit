@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>fp inspect</title>
+<link rel="stylesheet" href="/_fp/app.css">
+</head>
+<body>
+<div class="wrap">
+  <header class="site">
+    <span class="logo">fp<b>·</b>inspect</span>
+    <span class="tag">what your TLS/HTTP client actually looks like</span>
+    <nav><a href="/db">db lookup</a></nav>
+  </header>
+
+  <div id="verdict" class="verdict unknown">
+    <span class="emoji">⏳</span>
+    <div><div class="text">measuring…</div><div class="ja4"></div></div>
+  </div>
+
+  <div class="grid" id="cells"></div>
+
+  <details>
+    <summary>Raw <code>/api/all</code> JSON</summary>
+    <pre id="raw"></pre>
+  </details>
+
+  <div class="foot">
+    This page shows the fingerprint of <em>your</em> client, measured by the server terminating this TLS
+    connection. <code>JA4</code> is the TLS ClientHello fingerprint, <code>JA4H</code> the HTTP request
+    fingerprint, <code>Akamai-H2</code> the HTTP/2 framing fingerprint. The verdict is a reverse lookup
+    against the bundled dataset. Caveat: if this server sits behind a TLS-terminating proxy it measures the
+    proxy, not you — front it with SNI passthrough (<code>ssl_preread</code>) instead.
+  </div>
+</div>
+
+<script>
+function setCell(parent, k, v) {
+  if (!v) return;
+  const c = document.createElement('div'); c.className = 'cell';
+  const kk = document.createElement('div'); kk.className = 'k'; kk.textContent = k;
+  const vv = document.createElement('div'); vv.className = 'v'; vv.textContent = v;
+  c.appendChild(kk); c.appendChild(vv); parent.appendChild(c);
+}
+async function load() {
+  let d;
+  try { d = await (await fetch('/api/all', {headers: {'Accept': 'application/json'}})).json(); }
+  catch (e) { document.querySelector('#verdict .text').textContent = 'could not reach /api/all'; return; }
+  const v = d.verdict || {};
+  const box = document.getElementById('verdict');
+  const emoji = box.querySelector('.emoji');
+  const text = box.querySelector('.text');
+  const ja4 = box.querySelector('.ja4');
+  box.className = 'verdict ' + (v.browser ? 'ok' : (v.known ? (v.verdict === 'browser-engine' ? 'unknown' : 'bad') : 'unknown'));
+  if (v.browser) { emoji.textContent = '✅'; text.textContent = 'You look like: ' + v.label + ' — browser'; }
+  else if (v.verdict === 'browser-engine') { emoji.textContent = '🧪'; text.textContent = 'You look like: ' + v.label + ' — browser engine'; }
+  else if (v.known) { emoji.textContent = '❌'; text.textContent = 'You look like: ' + v.label + ' — not a browser'; }
+  else { emoji.textContent = '❓'; text.textContent = (d.ja4 === 'n/a' ? 'No TLS fingerprint (plain HTTP)' : 'Unknown client — not in dataset'); }
+  ja4.textContent = d.ja4 || '';
+
+  const cells = document.getElementById('cells'); cells.textContent = '';
+  setCell(cells, 'JA4', d.ja4);
+  setCell(cells, 'JA4 (raw)', d.ja4_raw);
+  setCell(cells, 'JA4H', d.ja4h);
+  setCell(cells, 'Akamai HTTP/2', d.akamai_h2);
+  setCell(cells, 'SNI', d.sni);
+  setCell(cells, 'ALPN', d.alpn);
+  setCell(cells, 'HTTP version', d.http_version);
+  document.getElementById('raw').textContent = JSON.stringify(d, null, 2);
+}
+load();
+</script>
+</body>
+</html>

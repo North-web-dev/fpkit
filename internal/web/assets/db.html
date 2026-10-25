@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>fp db lookup</title>
+<link rel="stylesheet" href="/_fp/app.css">
+</head>
+<body>
+<div class="wrap">
+  <header class="site">
+    <span class="logo">fp<b>·</b>db</span>
+    <span class="tag">reverse-look-up a JA4 fingerprint</span>
+    <nav><a href="/">inspect</a></nav>
+  </header>
+
+  <h1>JA4 reverse lookup</h1>
+  <p class="sub">Paste a JA4 TLS fingerprint. The answer comes from the bundled, measured dataset:
+     a real browser, a known automation client/library, or unknown.</p>
+
+  <div class="row">
+    <div>
+      <label for="q">JA4</label>
+      <input type="text" id="q" placeholder="t13d1516h2_8daaf6152771_d8a2da3f94cd" autocomplete="off">
+    </div>
+    <button class="btn" id="go">Look up</button>
+  </div>
+
+  <div id="verdict" class="verdict unknown" style="margin-top:20px; display:none;">
+    <span class="emoji"></span>
+    <div><div class="text"></div><div class="ja4"></div></div>
+  </div>
+
+  <div id="matches"></div>
+
+  <details style="margin-top:28px;">
+    <summary>Dataset entries</summary>
+    <div style="padding:0 16px 16px;"><table id="all"><thead><tr><th>Name</th><th>Verdict</th><th>JA4</th></tr></thead><tbody></tbody></table></div>
+  </details>
+</div>
+
+<script>
+function badge(v) {
+  const b = document.createElement('span'); b.className = 'badge ' + (v === 'browser' ? 'ok' : (v === 'browser-engine' ? 'eng' : (v === 'non-browser' ? 'bad' : '')));
+  b.textContent = v; return b;
+}
+async function lookup() {
+  const q = document.getElementById('q').value.trim();
+  if (!q) return;
+  const box = document.getElementById('verdict');
+  const m = document.getElementById('matches'); m.textContent = '';
+  let d;
+  try { d = await (await fetch('/api/db/ja4/' + encodeURIComponent(q))).json(); }
+  catch (e) { return; }
+  box.style.display = 'flex';
+  box.className = 'verdict ' + (d.browser ? 'ok' : (d.known ? (d.verdict === 'browser-engine' ? 'unknown' : 'bad') : 'unknown'));
+  box.querySelector('.emoji').textContent = d.browser ? '✅' : (d.verdict === 'browser-engine' ? '🧪' : (d.known ? '❌' : '❓'));
+  box.querySelector('.text').textContent = d.known ? d.summary : 'Unknown — not in dataset';
+  box.querySelector('.ja4').textContent = d.ja4;
+  if (d.matches && d.matches.length) {
+    const t = document.createElement('table');
+    t.innerHTML = '<thead><tr><th>Name</th><th>Verdict</th><th>Label</th><th>Source</th></tr></thead>';
+    const tb = document.createElement('tbody');
+    for (const e of d.matches) {
+      const tr = document.createElement('tr');
+      const c1 = document.createElement('td'); c1.className = 'mono'; c1.textContent = e.name;
+      const c2 = document.createElement('td'); c2.appendChild(badge(e.verdict));
+      const c3 = document.createElement('td'); c3.textContent = e.label;
+      const c4 = document.createElement('td'); c4.className = 'mono'; c4.textContent = (e.provenance||{}).source || '';
+      tr.append(c1, c2, c3, c4); tb.appendChild(tr);
+    }
+    t.appendChild(tb); m.appendChild(t);
+  }
+}
+async function loadAll() {
+  let d; try { d = await (await fetch('/api/db/list')).json(); } catch (e) { return; }
+  const tb = document.querySelector('#all tbody');
+  for (const e of d.entries || []) {
+    const tr = document.createElement('tr');
+    const c1 = document.createElement('td'); c1.className = 'mono'; c1.textContent = e.name;
+    const c2 = document.createElement('td'); c2.appendChild(badge(e.verdict));
+    const c3 = document.createElement('td'); c3.className = 'mono'; c3.textContent = e.tls.ja4;
+    tr.append(c1, c2, c3); tb.appendChild(tr);
+  }
+}
+document.getElementById('go').addEventListener('click', lookup);
+document.getElementById('q').addEventListener('keydown', e => { if (e.key === 'Enter') lookup(); });
+loadAll();
+</script>
+</body>
+</html>

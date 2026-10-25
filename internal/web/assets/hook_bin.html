@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>fp hook · inspector</title>
+<link rel="stylesheet" href="/_fp/app.css">
+</head>
+<body>
+<div class="wrap">
+  <header class="site">
+    <span class="logo">fp<b>·</b>hook</span>
+    <span class="tag">live request inspector</span>
+    <nav><a href="/">new bin</a></nav>
+  </header>
+
+  <h1>Bin <span class="mono" id="binid"></span></h1>
+  <p class="sub">Capture URL: <span class="pill-url" id="capUrl"></span></p>
+
+  <div id="list"><div class="empty">Waiting for the first request…</div></div>
+</div>
+
+<script>
+const id = location.pathname.split('/')[2] || '';
+document.getElementById('binid').textContent = id;
+document.getElementById('capUrl').textContent = location.origin + '/b/' + id + '/anything';
+
+function verdictBadge(v) {
+  const b = document.createElement('span');
+  if (!v || v.verdict === 'unknown') { b.className = 'badge'; b.textContent = v && v.ja4 === 'n/a' ? 'JA4 n/a (plain HTTP)' : 'JA4 unknown'; return b; }
+  b.className = 'badge ' + (v.browser ? 'ok' : (v.verdict === 'browser-engine' ? 'eng' : 'bad'));
+  b.textContent = (v.browser ? '✅ ' : (v.verdict === 'browser-engine' ? '🧪 ' : '❌ ')) + v.label;
+  return b;
+}
+function kvPre(obj) {
+  const pre = document.createElement('pre');
+  let s = '';
+  for (const k of Object.keys(obj)) s += k + ': ' + obj[k] + '\n';
+  pre.textContent = s; return pre;
+}
+function render(reqs) {
+  const list = document.getElementById('list'); list.textContent = '';
+  if (!reqs.length) { const e = document.createElement('div'); e.className = 'empty'; e.textContent = 'Waiting for the first request…'; list.appendChild(e); return; }
+  for (const r of reqs) {
+    const card = document.createElement('div'); card.className = 'req';
+    const top = document.createElement('div'); top.className = 'top';
+    const meth = document.createElement('span'); meth.className = 'meth'; meth.textContent = r.method;
+    const url = document.createElement('span'); url.className = 'url'; url.textContent = r.url;
+    const when = document.createElement('span'); when.className = 'when'; when.textContent = new Date(r.received_at).toLocaleTimeString();
+    top.append(meth, url, when);
+    const vrow = document.createElement('div'); vrow.style.margin = '10px 0 4px';
+    vrow.appendChild(verdictBadge(r.ja4_verdict));
+    if (r.ja4 && r.ja4 !== 'n/a') { const j = document.createElement('span'); j.className = 'mono'; j.style.color = 'var(--muted)'; j.style.marginLeft = '8px'; j.textContent = r.ja4; vrow.appendChild(j); }
+    card.append(top, vrow);
+    const dh = document.createElement('details'); dh.style.marginTop = '8px';
+    const sh = document.createElement('summary'); sh.textContent = 'Headers (' + Object.keys(r.headers || {}).length + ')'; dh.appendChild(sh);
+    dh.appendChild(kvPre(r.headers || {})); card.appendChild(dh);
+    if (r.body) {
+      const db = document.createElement('details'); db.open = true;
+      const sb = document.createElement('summary'); sb.textContent = 'Body (' + r.body_size + ' bytes' + (r.body_truncated ? ', truncated' : '') + ')'; db.appendChild(sb);
+      const pb = document.createElement('pre'); pb.textContent = r.body; db.appendChild(pb); card.appendChild(db);
+    }
+    list.appendChild(card);
+  }
+}
+async function poll() {
+  try { const d = await (await fetch('/api/bins/' + encodeURIComponent(id) + '/requests')).json(); render(d.requests || []); }
+  catch (e) {}
+}
+try {
+  const es = new EventSource('/i/' + encodeURIComponent(id) + '/stream');
+  es.onmessage = poll;
+  es.onerror = () => {};
+} catch (e) {}
+poll();
+setInterval(poll, 3000);
+</script>
+</body>
+</html>
