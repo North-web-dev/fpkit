@@ -1,5 +1,7 @@
 # fpkit — `fp`
 
+[![Release](https://img.shields.io/github/v/release/North-web-dev/fpkit?sort=semver)](https://github.com/North-web-dev/fpkit/releases) [![Go Reference](https://pkg.go.dev/badge/github.com/North-web-dev/fpkit.svg)](https://pkg.go.dev/github.com/North-web-dev/fpkit) [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE) ![Go](https://img.shields.io/github/go-mod/go-version/North-web-dev/fpkit)
+
 **One binary for both sides of the TLS/HTTP fingerprinting wire.** `fp` lets you
 *read* a client's fingerprint (JA3/JA4/JA4H/Akamai-H2), *forge* one byte-exact
 (the "unblockable curl"), *guard* a service by who's really knocking, *capture*
